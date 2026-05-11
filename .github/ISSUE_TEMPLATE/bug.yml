@@ -1,0 +1,41 @@
+name: Bug report
+description: Something broke or behaves wrong
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: A clear, short description of what you saw
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      placeholder: |
+        1. Go to /w/<wallet>
+        2. Click X
+        3. See error in console
+    validations:
+      required: true
+  - type: input
+    id: wallet
+    attributes:
+      label: Wallet address if relevant
+      description: If the bug only fires for a specific wallet
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      placeholder: |
+        - Browser: Chrome 130
+        - OS: macOS 14
+        - URL: https://www.stableboy.fun/...

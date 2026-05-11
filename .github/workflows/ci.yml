@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install
+        run: npm ci --no-audit --no-fund
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    # Build runs but doesn't gate the PR — production env vars aren't available
+    # in fork PRs, so we don't require this to pass.
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install
+        run: npm ci --no-audit --no-fund
+
+      - name: Build
+        run: npm run build
+        env:
+          # Stubs so Next can finish a build without real upstream calls.
+          # The scoring engine only runs at request time, so missing live
+          # env values here doesn't break compilation.
+          GMGN_API_KEY: "stub_gmgn_key_for_ci_build_check"
+          BITQUERY_TOKEN: "stub_bitquery_token_for_ci_build_check"
+          NEXT_PUBLIC_SUPABASE_URL: "https://stub.supabase.co"
+          SUPABASE_SERVICE_ROLE_KEY: "stub_supabase_service_role_for_ci_build_check"
