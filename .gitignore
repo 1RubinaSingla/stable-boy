@@ -1,0 +1,25 @@
+node_modules
+.next
+out
+build
+dist
+
+.env
+.env.local
+.env.*.local
+!.env.example
+
+*.log
+.DS_Store
+.vercel
+.turbo
+
+next-env.d.ts
+
+# Claude Code local config (contains permission grants that may include
+# command invocations with literal API keys — never commit this directory)
+.claude/
+
+# macOS "Copy of" / Finder duplicate artifacts
+* 2
+* 2.*

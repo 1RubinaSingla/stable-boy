@@ -1,0 +1,68 @@
+name: Score disagreement
+description: A specific wallet got a score you think is wrong
+title: "[score] "
+labels: ["score-disagreement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Highest-signal contribution you can make. Help tune the curves with real adversarial examples.
+  - type: input
+    id: wallet
+    attributes:
+      label: Wallet address
+      description: The Solana wallet that got the disputed score
+      placeholder: 7reR1o13S4VXpcTmB6Wtkrvi7wpba1C3x2LEmYEBRvLM
+    validations:
+      required: true
+  - type: input
+    id: actual_score
+    attributes:
+      label: Score it received
+      placeholder: "61"
+    validations:
+      required: true
+  - type: input
+    id: expected_score
+    attributes:
+      label: What you think it should be
+      placeholder: "around 30 — this is a bundler"
+    validations:
+      required: true
+  - type: dropdown
+    id: which_factor
+    attributes:
+      label: Which factor or penalty looks most off?
+      options:
+        - hold_duration
+        - paperhand_ratio
+        - funding_source
+        - wallet_age
+        - pnl_behavior
+        - token_diversity
+        - win_loss_distribution
+        - sol_balance
+        - bundle_co_buy penalty
+        - sniper_window penalty
+        - cluster proximity penalty
+        - wash_trade penalty
+        - funding_daisy_chain penalty
+        - other / not sure
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Links to on-chain transactions, screenshots, other tools' takes, etc.
+      placeholder: |
+        - solscan link to suspicious tx
+        - screenshot from trench.bot showing it was in a bundle
+        - etc.
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: Context, hunches, whatever

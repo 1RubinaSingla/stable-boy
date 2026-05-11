@@ -1,0 +1,28 @@
+name: Feature request
+description: Suggest something new
+title: "[feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before opening: check the [CONTRIBUTING](../../blob/main/CONTRIBUTING.md) "out of scope" list. Stable Boy is deliberately scoped tight.
+  - type: textarea
+    id: what
+    attributes:
+      label: What
+      description: One sentence describing the feature
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: What problem does this solve? Who benefits?
+    validations:
+      required: true
+  - type: textarea
+    id: sketch
+    attributes:
+      label: Sketch
+      description: Rough idea of how it would work, what it'd look like, etc.
